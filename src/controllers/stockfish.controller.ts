@@ -1,11 +1,15 @@
 import { Request, Response } from "express";
 import { defaultUnexpectedError } from "../helpers/decorators/defaultUnexpectedErrorMessage.decorator";
 import { ServerError } from "../helpers/errors/customErrors";
+import { getBestMoveFromFEN } from "../helpers/tools/getBestMoveFromFEN";
+//@ts-ignore
+import stockfish from "stockfish";
+import { getBestMoveFromPGN } from "../helpers/tools/getBestMoveFromPGN";
 
 class StockfishController {
   @defaultUnexpectedError("Can not get best move in PGN-position")
   async getBestMoveFromPGN(req: Request) {
-    const bestMove = "";
+    const bestMove = ''
 
     return {
       status: "ok",
@@ -16,7 +20,7 @@ class StockfishController {
 
   @defaultUnexpectedError("Can not get best move in FEN-position")
   async getBestMoveFromFEN(req: Request) {
-    const bestMove = "";
+    const bestMove = await getBestMoveFromFEN(req.body.position);
 
     return {
       status: "ok",
