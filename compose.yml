@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  main:
+    container_name: main
+    build:
+      context: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    ports:
+      - 5601:5600
+    restart: always
